@@ -1,3 +1,16 @@
+/*
+ 	Ryan Heath
+ 	Code based of University of Auckland Compsci 230 2015 Assignment 1 A1.java 
+ */
+
+
+/*
+ * ===========================================================
+ * Blackjack.java: Creates JFrame containing a blackjack game
+ * and buttons necessary to play it
+ * ===========================================================
+ */
+
 package blackjack;
 
 import javax.swing.*;
@@ -5,17 +18,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 @SuppressWarnings("serial")
 public class Blackjack extends JFrame {
-	AnimationPanel bjpanel;
-	JButton hitButton, standButton, betButton, resetButton; 
-	JTextField betTxt;
-
+	AnimationPanel bjpanel; //blackjack panel
+	JButton hitButton, standButton, betButton, resetButton; //buttons for hit, stand, bet and reset
+	JTextField betTxt;//text to input bet amount
+	
+	
+	/** main method 
+	  */
     public static void main(String[] args){
     	Blackjack BJFrame = new Blackjack();
 
     }
     
+    /**
+     Constructor for components
+     */
     public Blackjack(){
     	super("Blackjack");
     	bjpanel = new AnimationPanel();
@@ -31,9 +51,13 @@ public class Blackjack extends JFrame {
     }
 
     
+    /** Sets up the button panel
+     * @return buttonPanel     the button panel
+     */
     public JPanel setUpButtons(){
-    	betTxt = new JTextField("100");
     	JPanel buttonPanel = new JPanel(new FlowLayout());
+    	//Bet Button setup
+    	betTxt = new JTextField("100");
     	betButton = new JButton("Bet");
     	betButton.setToolTipText("Insert number between $2 and $500");
     	betButton.addActionListener(new ActionListener(){
@@ -54,6 +78,7 @@ public class Blackjack extends JFrame {
 
     		}
     	});
+    	//Hit Button setup
     	hitButton = new JButton("Hit");
 		hitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -69,6 +94,7 @@ public class Blackjack extends JFrame {
 			}
     	});
 		hitButton.setEnabled(false);
+    	//Stand Button setup
 		standButton = new JButton("Stand");
 		standButton.setEnabled(false);
 		standButton.addActionListener(new ActionListener(){
@@ -84,6 +110,7 @@ public class Blackjack extends JFrame {
 				}
 			 }
 		});
+    	//Reset Button setup
 		resetButton = new JButton("Reset");
 		resetButton.setEnabled(false);
 		resetButton.addActionListener(new ActionListener(){
@@ -95,6 +122,8 @@ public class Blackjack extends JFrame {
 				resetButton.setEnabled(false);
 			}
 		});
+		
+		//Adding the buttons to the panel
 		buttonPanel.add(betButton);
 		buttonPanel.add(betTxt);
 		buttonPanel.add(hitButton);

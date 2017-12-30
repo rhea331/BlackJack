@@ -1,5 +1,5 @@
 package blackjack;
-
+//possible TODO: set card values to default and add new function for blackjack values
 public enum FaceEnum {
 	ACE(11),
 	TWO(2),
@@ -17,10 +17,16 @@ public enum FaceEnum {
 	
 	private int value;
 	
+	/** Sets value
+	 * @param value    the value of the card
+	 */
 	FaceEnum(int value){
 		this.value = value;
 	}
 	
+	/** Returns value of card
+	 * @return value   the value of the card
+	 */
 	int returnValue(){
 		return value;
 	}
