@@ -33,7 +33,6 @@ public class AnimationPanel extends JPanel{
 	private GameStateEnum GameState; //Used for drawing and disabling buttons
 	private int TotalMoney = 1000; //The total money the player has
 	private int currentBet = 0; //What the player has bet
-	private SwingWorker<Void, Void> worker;
 	protected BufferedImage background; 
     public AnimationPanel() {
     	PlayerHand = new Hand(400,350);
@@ -87,7 +86,7 @@ public class AnimationPanel extends JPanel{
 	 */
 	public void stand(){
 			GameState = GameStateEnum.PLAYING; //game is in progress
-			worker = new SwingWorker<Void, Void>(){ //used to be able to call repaint() between draws without freezing the GUI
+			SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>(){ //used to be able to call repaint() between draws without freezing the GUI
 			@Override
 			protected Void doInBackground() throws Exception{ //reveals second card, then draws new card until above 17, pausing for a second each draw
 				DealerHand.revealSecond();
@@ -114,22 +113,19 @@ public class AnimationPanel extends JPanel{
 				int dealervalue = DealerHand.getTotalValue();
 				if (dealervalue > 21){ //Dealer went bust
 					TotalMoney+=currentBet+currentBet;
-					currentBet = 0;
 					GameState = GameStateEnum.PLAYERWIN;
 				}else{
 					if(dealervalue > PlayerHand.getTotalValue()){ //Dealer has a higher total
-						currentBet = 0;
 						GameState = GameStateEnum.DEALERWIN;
 					}else if(dealervalue == PlayerHand.getTotalValue()){//Dealer and Player are tied
 						TotalMoney+=currentBet;
 						GameState = GameStateEnum.STANDOFF;
 					}else{ //Player has a higher total
 						TotalMoney+=currentBet+currentBet;
-						currentBet = 0;
 						GameState = GameStateEnum.PLAYERWIN;
-					}
-					
+					}				
 				}
+				currentBet = 0;
 				repaint(); //draws the outcome
 			}
 			
