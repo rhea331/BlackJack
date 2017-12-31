@@ -6,6 +6,7 @@
  * Card.java: Used for cards. Can set and get face and suit of 
  * card, along with x and y coordinates for drawing. Can also
  * flip card.
+ * Card images from  Welopez, http://jbfilesarchive.com/phpBB3/viewtopic.php?t=1003
  * ===========================================================
  */
 

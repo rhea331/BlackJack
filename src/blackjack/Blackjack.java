@@ -30,7 +30,6 @@ public class Blackjack extends JFrame {
 	  */
     public static void main(String[] args){
     	Blackjack BJFrame = new Blackjack();
-
     }
     
     /**
@@ -62,14 +61,17 @@ public class Blackjack extends JFrame {
     	betButton.setToolTipText("Insert number between $2 and $500");
     	betButton.addActionListener(new ActionListener(){
     		public void actionPerformed(ActionEvent e){
-    			if(bjpanel.getGameState() ==1){
+    			if(bjpanel.getGameState() == GameStateEnum.DEFAULT){
     				int betNo=0;
     				try{
     					betNo = Integer.parseInt(betTxt.getText());
+    					if(betNo > bjpanel.getTotalMoney()){
+    						JOptionPane.showMessageDialog(null, "You don't have enough money!");
+    					}
     					if (betNo > 1 && betNo < 501){
     						hitButton.setEnabled(true);
     						standButton.setEnabled(true);
-    						bjpanel.initalize(betNo);
+    						bjpanel.initialize(betNo);
     					}else{
     						JOptionPane.showMessageDialog(null, "Please insert a number between 2 and 500.");
     					}
@@ -82,14 +84,8 @@ public class Blackjack extends JFrame {
     	hitButton = new JButton("Hit");
 		hitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(bjpanel.getGameState() == 2){
+				if(bjpanel.getGameState() == GameStateEnum.INITIALIZING){
 					bjpanel.hit();
-				}
-				if (bjpanel.getTotalMoney() <= 0){
-					hitButton.setEnabled(false);
-					standButton.setEnabled(false);
-					betButton.setEnabled(false);
-					resetButton.setEnabled(true);
 				}
 			}
     	});
@@ -99,27 +95,19 @@ public class Blackjack extends JFrame {
 		standButton.setEnabled(false);
 		standButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				if(bjpanel.getGameState() == 2){
+				if(bjpanel.getGameState() == GameStateEnum.INITIALIZING){
 					bjpanel.stand();
-				}
-				if (bjpanel.getTotalMoney() <= 0){
-					hitButton.setEnabled(false);
-					standButton.setEnabled(false);
-					betButton.setEnabled(false);
-					resetButton.setEnabled(true);
 				}
 			 }
 		});
     	//Reset Button setup
 		resetButton = new JButton("Reset");
-		resetButton.setEnabled(false);
+		resetButton.setEnabled(true);
 		resetButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				bjpanel.reset();
-				hitButton.setEnabled(true);
-				standButton.setEnabled(true);
-				betButton.setEnabled(true);
-				resetButton.setEnabled(false);
+				if(bjpanel.getGameState() == GameStateEnum.DEFAULT){
+					bjpanel.reset();
+				}
 			}
 		});
 		
