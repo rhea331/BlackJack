@@ -88,12 +88,8 @@ public class Hand {
 	 */
 	public void draw(Graphics g){
 		int handX;
-		if(hand.size()!= 0){//TODO: find a better way to draw cards evenly apart
-			if((hand.size() & 1) ==0){//sets inital point for first card to draw
-				handX = 76+(hand.size()/2-1)*(81); //if odd
-			}else{
-				handX = 36+((hand.size()-1)/2)*(81);//if even
-			}
+		if(hand.size()!= 0){
+			handX = 36+(hand.size()-1)*(41);
 			for(Card card : hand){ //draws card
 				card.setX(x-handX);
 				card.setY(y-48);

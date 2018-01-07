@@ -10,10 +10,16 @@ public enum GameStateEnum {
 	
 	private String message;
 	
+	/** Sets ending message
+	 * @param message   the message to be displayed
+	 */
 	GameStateEnum(String message){
 		this.message = message;
 	}
 	
+	/** Returns the message to be displayed
+	 * @return message    the displayed message
+	 */
 	String returnMessage(){
 		return message;
 	}

@@ -106,10 +106,6 @@ public class AnimationPanel extends JPanel{
 			}
 			@Override
 			protected void done(){ //when finished, determines if dealer has gone bust, or if it hasn't, check whether dealer or player has a higher total value
-				while(DealerHand.getTotalValue() < 17){
-					DealerHand.addCard(deck.drawCard());
-					repaint();
-				}
 				int dealervalue = DealerHand.getTotalValue();
 				if (dealervalue > 21){ //Dealer went bust
 					TotalMoney+=currentBet+currentBet;
@@ -134,7 +130,7 @@ public class AnimationPanel extends JPanel{
 		
 	}
 	
-	/** Initalizes the game
+	/** Initializes the game
 	 * @param bet the amount of money the player has bet
 	 */
 	public void initialize(int bet){ 

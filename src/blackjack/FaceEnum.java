@@ -1,5 +1,4 @@
 package blackjack;
-//possible TODO: set card values to default and add new function for blackjack values
 public enum FaceEnum {
 	ACE(11),
 	TWO(2),
